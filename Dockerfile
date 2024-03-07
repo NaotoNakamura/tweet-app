@@ -1,18 +1,16 @@
-FROM ruby:3.3.0
+FROM ruby:3.3.0-alpine3.19
 
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+RUN apk update && apk add --no-cache \
+  build-base \
+  postgresql-dev \
+  tzdata \
+  git \
+  yarn \
+  shared-mime-info \
+  gcompat \
+  chromium \
+  chromium-chromedriver \
+  font-ipa \
+  bash
 
-RUN apt-get update && apt-get install -y \
-      nodejs postgresql-client chromium chromium-driver
-
-RUN npm install -g yarn
-
-# ディレクトリ・ファイルの作成
-RUN mkdir /tweet-app
 WORKDIR /tweet-app
-COPY Gemfile /tweet-app/Gemfile
-COPY Gemfile.lock /tweet-app/Gemfile.lock
-
-# gem(Rails7)のインストール
-RUN bundle install
-COPY . /tweet-app
