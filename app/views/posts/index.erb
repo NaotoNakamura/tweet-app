@@ -1,0 +1,10 @@
+<h2>新規投稿</h2>
+<%= form_with model: @post, local: true do |form| %>
+  <%= form.text_field :body %>
+  <%= form.submit '投稿する' %>
+<% end %>
+
+<h2>投稿一覧</h2>
+<% @posts.each do |post| %>
+  <p><%= post.body %><p>
+<% end %>
