@@ -1,5 +1,12 @@
+<% if user_signed_in? %>
+  <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
+<% else %>
+  <%= link_to "サインアップ", new_user_registration_path %>
+  <%= link_to "ログイン", new_user_session_path %>
+<% end %>
+
 <h2>新規投稿</h2>
-<%= form_with model: @post, data: { turbo: false } do |f| %>
+<%= form_with model: @post do |f| %>
   <%= f.text_field :body %>
   <%= f.submit '投稿する' %>
 <% end %>
@@ -9,6 +16,6 @@
   <div>
     <%= post.body %>
     <%= post.created_at %>
-    <%= button_to "削除", post_path(post), data: { turbo: false }, method: :delete %>
+    <%= link_to "削除", post_path(post), data: { turbo_method: :delete } %>
   </div>
 <% end %>
