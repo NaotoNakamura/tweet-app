@@ -5,7 +5,9 @@ class CommentsController < ApplicationController
     if comment.save
       redirect_to post_comments_path(comment.post_id)
     else
-      p "failed"
+      @post = comment.post
+      @comment = @post.comments.build
+      render "posts/show"
     end
   end
 
