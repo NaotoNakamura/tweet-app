@@ -2,5 +2,17 @@
 <div><%= @post.body %></div>
 <%= @post.created_at %>
 
-<h2>コメント</h2>
-<button>コメントする</button>
+<h2>コメント一覧</h2>
+<% @post.comments.each do |comment| %>
+  <div>
+    <%= comment.body %>
+    <%= comment.created_at %>
+  </div>
+<% end %>
+
+<h2>コメント投稿</h2>
+<%= form_with model: [@post, @comment] do |f| %>
+  <%= f.text_field :body %>
+  <%= f.submit 'コメントする' %>
+<% end %>
+
